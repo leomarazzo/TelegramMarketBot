@@ -1,0 +1,5 @@
+{
+  "welcome": {
+    "en": "*Welcome to MarketBot*\nThis bot is to help you know which items you have added to your market kart\\.\nEnter the /new command to start a market list\\.\nYou can add items to the kart typing:\n*product name* *ammount* *unit price* _\\(separated by spaces\\)_\n\nYou can add see the kart content anytime with the /print command\\.\nIf you need more details you can use the /print\\_det command \\(Probably you will need a wider screen, you can rotate your phone for this\\)\\.\nYou can see the total kart ammount with the /total command\\."
+  }
+}
