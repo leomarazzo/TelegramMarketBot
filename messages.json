@@ -7,5 +7,11 @@
   },
   "no list": {
     "en": "No list created for: {}.\nUse the /new command to create a new list"
+  },
+  "bad_remove_command": {
+    "en": "The /remove command requires the product index or product name"
+  },
+  "not_Found_command": {
+    "en": "The provided product was not found"
   }
 }

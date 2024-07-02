@@ -4,6 +4,7 @@ import tempfile
 from typing import Dict
 from telebot import TeleBot
 
+from exceptions import BadCommandException, NotFoundException
 from market_list import MarketList
 
 
@@ -25,6 +26,19 @@ class MarketBot:
             self.lists[message.chat.id].add_item(message.text)
             self.bot.reply_to(message, "Added")
             self.bot.send_message(message.chat.id, f"Total: {self.lists[message.chat.id].total()}")
+        else:
+            self.bot.send_message(message.chat.id, self.messages["no list"]["en"].format(message.from_user.username))
+    
+    def remove(self, message):
+        if message.chat.id in self.lists:
+            try:
+                self.lists[message.chat.id].remove(message.text)
+                self.bot.reply_to(message, "removed")
+                self.bot.send_message(message.chat.id, f"Total: {self.lists[message.chat.id].total()}")
+            except BadCommandException:
+                self.bot.send_message(message.chat.id, self.messages["bad_remove_command"]["en"])
+            except NotFoundException:
+                self.bot.send_message(message.chat.id, self.messages["not_Found_command"]["en"])
         else:
             self.bot.send_message(message.chat.id, self.messages["no list"]["en"].format(message.from_user.username))
 
@@ -66,3 +80,4 @@ class MarketBot:
         self.bot.register_message_handler(self.print_det, commands=["print_det"])
         self.bot.register_message_handler(self.total, commands=["total"])
         self.bot.register_message_handler(self.export, commands=["export"])
+        self.bot.register_message_handler(self.remove, commands=["remove"])
